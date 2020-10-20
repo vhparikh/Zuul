@@ -36,3 +36,17 @@ void Room::removeItems(Item* object) {
     }
   }
 }
+
+bool Room::validItem(char* object) {
+  for (vector<Item*>::iterator it = items.begin(); it != items.end(); it++) {
+    if (strcmp(object, (*it)->getName()) == 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+vector<Item*>* Room::getItems() {
+  return &items;
+}
+      

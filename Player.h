@@ -15,9 +15,9 @@ class Player
   Player(Room* startRoom);
   Room* getCurrentRoom();
   void setCurrentRoom(Room* newRoom);
-  void addInventory(Item* newItem);
-  void printInventory();
-  void removeInventory(Item* newItem);
+  void pick(char* newItem);
+  void list();
+  void drop(char* newItem);
  private:
   vector<Item*> inventory;
   Room* currentRoom;

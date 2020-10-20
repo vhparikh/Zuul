@@ -16,6 +16,8 @@ class Room {
   void printItems();
   void addItems(Item* object);
   void removeItems(Item* object);
+  bool validItem(char* object);
+  vector<Item*>* getItems();
 private:
   char description[1000];
   char name[100];

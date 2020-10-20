@@ -16,10 +16,16 @@ char* Parser::getSubStr1(char* str) {
       counter++;
       break;
     }
-    sub1[counter] = str[i];
-    counter++;
+    if (str[i] >= 'A' && str[i] <= 'Z') {
+      sub1[counter] = str[i] + 32;
+      counter++;
+    }
+    else {
+      sub1[counter] = str[i];
+      counter++;
+    }
   }
-
+  
   sub1[counter] = '\0';
   cout << sub1 << endl;
   return sub1;
@@ -29,8 +35,14 @@ char* Parser::getSubStr2(char* str, int start, int end) {
   char* sub2 = new char();
   int counter = 0;
   for (int i = start; i < end; i++) {
-    sub2[counter] = str[i];
-    counter++;
+    if (str[i] >= 'A' && str[i] <= 'Z') {
+      sub2[counter] = str[i] + 32;
+      counter++;
+    }
+    else {
+      sub2[counter] = str[i];
+      counter++;
+    }
   }
   cout << sub2 << endl;
   return sub2;
