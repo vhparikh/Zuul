@@ -3,6 +3,9 @@
 #include <vector>
 #include "Item.h"
 
+#ifndef ROOM_H
+#define ROOM_H
+
 using namespace std;
 
 class Room {
@@ -12,9 +15,11 @@ class Room {
   char* getName();
   void printItems();
   void addItems(Item* object);
-  void removeItems(vector<Item*>* objects, char name[]);
- private:
+  void removeItems(Item* object);
+private:
   char description[1000];
   char name[100];
   vector<Item*> items;
 };
+
+#endif

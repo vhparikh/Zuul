@@ -28,10 +28,9 @@ void Room::addItems(Item* object) {
   items.push_back(object);
 }
 
-void Room::removeItems(vector<Item*>* objects, char name[]) {
+void Room::removeItems(Item* object) {
   for (vector<Item*>::iterator it = items.begin(); it != items.end(); it++) {
-    if (strcmp((*it)->getName(), name) == 0) {
-      objects->push_back(*it);
+    if (strcmp(object->getName(), (*it)->getName()) == 0) {
       items.erase(it);
       return;
     }

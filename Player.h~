@@ -1,0 +1,12 @@
+#include <iostream>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+
+class Player {
+ public:
+  Player();
+ private:
+  vector<Item*> inventory;
+};
