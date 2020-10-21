@@ -27,7 +27,7 @@ char* Parser::getSubStr1(char* str) {
   }
   
   sub1[counter] = '\0';
-  cout << sub1 << endl;
+  //  cout << sub1 << endl;
   return sub1;
 }
 
@@ -44,7 +44,7 @@ char* Parser::getSubStr2(char* str, int start, int end) {
       counter++;
     }
   }
-  cout << sub2 << endl;
+  //cout << sub2 << endl;
   return sub2;
 }
 

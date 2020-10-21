@@ -2,6 +2,7 @@
 #include <cstring>
 #include <vector>
 #include <iterator>
+#include <map>
 #include "Room.h"
 
 using namespace std;
@@ -20,8 +21,9 @@ char* Room::getName() {
 
 void Room::printItems() {
   for (vector<Item*>::iterator it = items.begin(); it != items.end(); it++) {
-    cout << (*it)->getName() << endl;
+    cout << (*it)->getName() << ' ';
   }
+  cout << endl;
 }
 
 void Room::addItems(Item* object) {
@@ -49,4 +51,32 @@ bool Room::validItem(char* object) {
 vector<Item*>* Room::getItems() {
   return &items;
 }
-      
+
+bool Room::validKey(char* key) {
+  for (map<const char*, Room*>::iterator it = exits.begin(); it != exits.end(); it++) {
+    if (strcmp(key, it->first) == 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+void Room::printExits() {
+  for (map<const char*, Room*>::iterator it = exits.begin(); it != exits.end(); it++) {
+    cout << it->first << ' ';
+  }
+  cout << endl;
+} 
+
+map<const char*, Room*>* Room::getExits() {
+  return &exits;
+}
+
+Room* Room::getRoomByKey(char* key) {
+  for (map<const char*, Room*>::iterator it = exits.begin(); it != exits.end(); it++) {
+    if (strcmp(key, it->first) == 0) {
+      return it->second;
+    }
+  }
+  return this;
+}

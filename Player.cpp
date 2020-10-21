@@ -12,8 +12,8 @@ Player::Player(Room* startRoom) {
 
 
 Room* Player::getCurrentRoom() {
-  cout << currentRoom->getName() << endl;
-  cout << currentRoom->getDescription() << endl;
+  //  cout << currentRoom->getName() << endl;
+  //cout << currentRoom->getDescription() << endl;
   return currentRoom;
 }
 
@@ -27,6 +27,7 @@ void Player::pick(char* newItem) {
     if (strcmp(newItem, (*it)->getName()) == 0) {
       inventory.push_back(*it);
       currentRoom->removeItems(*it);
+      cout << (*it)->getName() << " has been added to your inventory" << endl;
       return;
     }
   }
@@ -34,9 +35,14 @@ void Player::pick(char* newItem) {
 }
 
 void Player::list() {
-  for (vector<Item*>::iterator it = inventory.begin(); it != inventory.end(); it++) {
-    cout << (*it)->getName() << endl;
+  if (inventory.empty()) {
+    cout << "Your inventory is empty" << endl;
+    return;
   }
+  for (vector<Item*>::iterator it = inventory.begin(); it != inventory.end(); it++) {
+    cout << (*it)->getName() << ' ';
+  }
+  cout << endl;
 }
 
 void Player::drop(char* newItem) {
@@ -44,6 +50,7 @@ void Player::drop(char* newItem) {
     if (strcmp(newItem, (*it)->getName()) == 0) {
       currentRoom->addItems(*it);
       inventory.erase(it);
+      cout << (*it)->getName() << " has been removed from your inventory" << endl;
       return;
     }
   }
