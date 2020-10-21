@@ -17,11 +17,10 @@ class Room {
   void printItems();
   void addItems(Item* object);
   void removeItems(Item* object);
-  bool validItem(char* object);
   vector<Item*>* getItems();
   bool validKey(char* key);
-  void printExits();
   map<const char*, Room*>* getExits();
+  void printExits();
   Room* getRoomByKey(char* key);
 private:
   char description[1000];

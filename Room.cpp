@@ -39,15 +39,6 @@ void Room::removeItems(Item* object) {
   }
 }
 
-bool Room::validItem(char* object) {
-  for (vector<Item*>::iterator it = items.begin(); it != items.end(); it++) {
-    if (strcmp(object, (*it)->getName()) == 0) {
-      return true;
-    }
-  }
-  return false;
-}
-
 vector<Item*>* Room::getItems() {
   return &items;
 }
@@ -61,16 +52,16 @@ bool Room::validKey(char* key) {
   return false;
 }
 
+map<const char*, Room*>* Room::getExits() {
+  return &exits;
+}
+
 void Room::printExits() {
   for (map<const char*, Room*>::iterator it = exits.begin(); it != exits.end(); it++) {
     cout << it->first << ' ';
   }
   cout << endl;
 } 
-
-map<const char*, Room*>* Room::getExits() {
-  return &exits;
-}
 
 Room* Room::getRoomByKey(char* key) {
   for (map<const char*, Room*>::iterator it = exits.begin(); it != exits.end(); it++) {
