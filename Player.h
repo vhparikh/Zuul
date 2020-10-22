@@ -18,7 +18,8 @@ class Player
   void pick(char* newItem);
   void list();
   void drop(char* newItem);
- private:
+  int getInventorySize();
+private:
   vector<Item*> inventory;
   Room* currentRoom;
 };

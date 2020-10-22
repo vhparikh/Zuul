@@ -56,3 +56,7 @@ void Player::drop(char* newItem) {
   }
   cout << "Not a valid item in your inventory" << endl;
 }
+
+int Player::getInventorySize() {
+  return inventory.size();
+}
