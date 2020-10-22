@@ -9,7 +9,7 @@ Parser::Parser() {
 }
 
 char* Parser::getSubStr1(char* str) {
-  char* sub1 = new char();
+  char* sub1 = new char[20];
   int counter = 0;
   for (int i = 0; i < strlen(str); i++) {
     if (str[i] == ' ') {
@@ -27,12 +27,11 @@ char* Parser::getSubStr1(char* str) {
   }
   
   sub1[counter] = '\0';
-  //  cout << sub1 << endl;
   return sub1;
 }
 
 char* Parser::getSubStr2(char* str, int start, int end) {
-  char* sub2 = new char();
+  char* sub2 = new char[end-start];
   int counter = 0;
   for (int i = start; i < end; i++) {
     if (str[i] >= 'A' && str[i] <= 'Z') {
@@ -44,12 +43,6 @@ char* Parser::getSubStr2(char* str, int start, int end) {
       counter++;
     }
   }
-  //cout << sub2 << endl;
   return sub2;
 }
-
-bool Parser::validCommand(char* str) {
-  return false;
-}
-
 

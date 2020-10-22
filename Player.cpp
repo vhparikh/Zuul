@@ -12,8 +12,6 @@ Player::Player(Room* startRoom) {
 
 
 Room* Player::getCurrentRoom() {
-  //  cout << currentRoom->getName() << endl;
-  //cout << currentRoom->getDescription() << endl;
   return currentRoom;
 }
 
@@ -48,9 +46,9 @@ void Player::list() {
 void Player::drop(char* newItem) {
   for (vector<Item*>::iterator it = inventory.begin(); it != inventory.end(); it++) {
     if (strcmp(newItem, (*it)->getName()) == 0) {
+      cout << (*it)->getName() << " has been removed from your inventory" << endl;
       currentRoom->addItems(*it);
       inventory.erase(it);
-      cout << (*it)->getName() << " has been removed from your inventory" << endl;
       return;
     }
   }

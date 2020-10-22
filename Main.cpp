@@ -102,33 +102,49 @@ int main()
   r15->getExits()->insert(pair<const char*, Room*>("west", r14));
   r15->getExits()->insert(pair<const char*, Room*>("north", r7));
 
-  Item* toy = new Item();
-  strcpy(toy->getName(), "toy");
-  r4->addItems(toy);
+  Item* key = new Item();
+  strcpy(key->getName(), "key");
+  r6->addItems(key);
+
+  Item* skull = new Item();
+  strcpy(skull->getName(), "skull");
+  r9->addItems(skull);
+
+  Item* spider = new Item();
+  strcpy(spider->getName(), "spider eye");
+  r13->addItems(spider);
+
+  Item* axe = new Item();
+  strcpy(axe->getName(), "axe");
+  r15->addItems(axe);
+
+  Item* invisible = new Item();
+  strcpy(invisible->getName(), "invisibility potion");
+  r8->addItems(invisible);
   
   Parser parser;
   Player player(r1);
 
   char input[100];
-  bool quit = false;
-  bool openexit = false;
+  int counter = 0;
+
   
   cout << "You are currently in the: " << r1->getName() << ", " << r1->getDescription() << endl;
   cout << "Your exits are: ";
   r1->printExits();
   
-  while (strcmp(parser.getSubStr1(input), "quit") != 0 ||
-	 strcmp(player.getCurrentRoom()->getName(), "Exit") != 0) {
+  while (true) {
 
-    if (player.getInventorySize() == 1 && !openexit) {
-      Room* r16 = new Room();
-      strcpy(r16->getName(), "Exit");
-      strcpy(r16->getDescription(), "You finally reached the exit!");
-      r16->getExits()->insert(pair<const char*, Room*>("south", r6));
-      r6->getExits()->insert(pair<const char*, Room*>("north", r16));
-      openexit = true;
+    if (player.getInventorySize() == 5) {
+      cout << "Congratulations you found all the items! You made it out Alive" << endl;
+      return 1;
     }
 
+    if (counter == 35) {
+      cout << "Game over you didn't make it out in time the zombies will now feast on you" << endl;
+      return 2;
+    }
+    
     cin.get(input, 100);
     cin.get();
     char* s1 = parser.getSubStr1(input);
@@ -143,6 +159,7 @@ int main()
 	cout << "The items in this room are: ";
 	player.getCurrentRoom()->printItems();
 	delete direction;
+	counter++;
       }
       else {
 	cout << "Invalid exit" << endl;
@@ -170,7 +187,8 @@ int main()
       player.getCurrentRoom()->printItems();
     }
     else if (strcmp(s1, "quit") == 0) {
-      quit = true;
+      cout << "Rip looks like you gave up. I guess we have dinner for the zombies tonight" << endl;
+      return 0;
     }
   }
   
