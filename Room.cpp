@@ -1,3 +1,8 @@
+//Created by Vatsal Parikh
+//Date: 10/23/20
+//cpp file for the room class
+
+//imports
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -7,7 +12,7 @@
 
 using namespace std;
 
-Room::Room() {
+Room::Room() { //room constructor
 
 }
 
