@@ -83,7 +83,7 @@ int main()
   r1->getExits()->insert(pair<const char*, Room*>("north", r2));
   r1->getExits()->insert(pair<const char*, Room*>("east", r14));
 
-  //repeat of previos
+  //repeat of previous
   r2->getExits()->insert(pair<const char*, Room*>("south", r1));
   r2->getExits()->insert(pair<const char*, Room*>("north", r3));
   r2->getExits()->insert(pair<const char*, Room*>("east", r4));
@@ -150,31 +150,34 @@ int main()
   Parser parser; //create parser
   Player player(r1); //create a player and start them at the entrance
 
-  char input[100];
-  int counter = 0;
-  
+  char input[100]; //input from user
+  int counter = 0; //counter for number of moves
+
+  //print intro
+  cout << "Welcome to Zuul, you are in a haunted house you need to get out alive. The only way to get out is if you find all five items in the house, but it needs to be done within 35 turns. Good Luck DON'T DIE!!!" << endl;
+  cout << "Your commands are: GO, PICK, DROP, INVENTORY, EXITS, ITEMS, HELP, QUIT" << endl;
   cout << "You are currently in the: " << r1->getName() << ", " << r1->getDescription() << endl;
   cout << "Your exits are: ";
   r1->printExits();
-  
-  while (true) {
 
-    if (player.getInventorySize() == 5) {
+  while (true) { //while true loop
+
+    if (player.getInventorySize() == 5) { //if the player has all five items they won the game end the program
       cout << "Congratulations you found all the items! You made it out Alive" << endl;
       return 1;
     }
 
-    if (counter == 35) {
+    if (counter == 35) { //if the player has used 35 turns end the game they lost
       cout << "Game over you didn't make it out in time the zombies will now feast on you" << endl;
       return 2;
     }
     
-    cin.get(input, 100);
+    cin.get(input, 100); //gets the input
     cin.get();
-    char* s1 = parser.getSubStr1(input);
-    if (strcmp(s1, "go") == 0) {
-      char* direction = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1);
-      if (player.getCurrentRoom()->validKey(direction)) {
+    char* s1 = parser.getSubStr1(input); //get the first substring in the input
+    if (strcmp(s1, "go") == 0) { //if go is typed
+      char* direction = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1); //get second substring which is the direction of movement
+      if (player.getCurrentRoom()->validKey(direction)) { //if a valid direction is entered switch the current room and print out the info
 	player.setCurrentRoom(player.getCurrentRoom()->getRoomByKey(direction));
 	cout << "You are currently in the: " << player.getCurrentRoom()->getName() << ", " <<
 	  player.getCurrentRoom()->getDescription() << endl;
@@ -182,41 +185,43 @@ int main()
 	player.getCurrentRoom()->printExits();
 	cout << "The items in this room are: ";
 	player.getCurrentRoom()->printItems();
-	delete direction;
-	direction = NULL;
-	counter++;
+	delete direction; //deletes the pointer
+	direction = NULL; //sets the pointer to null to be safe
+	counter++; //increments the counter for moves
       }
-      else {
+      else { //else invalid exit was entered
 	cout << "Invalid exit" << endl;
       }
     }
-    else if (strcmp(s1, "pick") == 0) {
-      char* item = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1);
-      player.pick(item);
-      delete item;
-      item = NULL;
+    else if (strcmp(s1, "pick") == 0) { //if pick is typed
+      char* item = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1); //get the second substring which is the item to pick up
+      player.pick(item); //calls the pick function and adds it to the inventory
+      delete item; //deletes the item pointer
+      item = NULL; //sets the pointer to null to be safe
     }
-    else if (strcmp(s1, "drop") == 0) {
-      char* item = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1);
-      player.drop(item);
-      delete item;
-      item = NULL;
+    else if (strcmp(s1, "drop") == 0) { //if drop is typed
+      char* item = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1); //get the second substring which is the item to drop
+      player.drop(item); //drops the items and removes it from the inventory
+      delete item; //deletes the item pointer
+      item = NULL; //sets the pointer to null to be safe
     }
-    else if (strcmp(s1, "inventory") == 0) {
-      player.list();
+    else if (strcmp(s1, "inventory") == 0) { //if inventory is typed
+      player.list(); //calls the list function to list out items in the inventory
     }
-    else if (strcmp(s1, "exits") == 0) {
-      cout << "Your exits are: ";
-      player.getCurrentRoom()->printExits();
+    else if (strcmp(s1, "exits") == 0) { //if exits is typed
+      cout << "Your exits are: "; 
+      player.getCurrentRoom()->printExits(); //prints out the exits available in the current room
     }
-    else if (strcmp(s1, "items") == 0) {
+    else if (strcmp(s1, "items") == 0) { //if items is typed
       cout << "The items in this room are: ";
-      player.getCurrentRoom()->printItems();
+      player.getCurrentRoom()->printItems(); //prints out the items available in the current room
     }
-    else if (strcmp(s1, "quit") == 0) {
+    else if (strcmp(s1, "help") == 0) { //if help is typed
+      cout << "Your commands are: GO, PICK, DROP, INVENTORY, EXITS, ITEMS, HELP, QUIT" << endl; //print out the potential commands
+    }
+    else if (strcmp(s1, "quit") == 0) { //if quit is typed end the game and tell the player they lost
       cout << "Rip looks like you gave up. I guess we have dinner for the zombies tonight" << endl;
       return 0;
     }
   }
-  
 }
