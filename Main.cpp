@@ -223,5 +223,7 @@ int main()
       cout << "Rip looks like you gave up. I guess we have dinner for the zombies tonight" << endl;
       return 0;
     }
+    delete s1;
+    s1 = NULL;
   }
 }
