@@ -18,7 +18,7 @@ char* Parser::getSubStr1(char* str) { //returns pointer to first substring in th
   int counter = 0; //counter
   for (int i = 0; i < strlen(str); i++) {
     if (str[i] == ' ') { //if the slot is a space increment counter and leave the loop
-      counter++;
+      //      counter++;
       break;
     }
     if (str[i] >= 'A' && str[i] <= 'Z') { //if a letter add it in lower case
