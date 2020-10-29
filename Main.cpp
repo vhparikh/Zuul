@@ -175,7 +175,6 @@ int main()
     cin.get(input, 100); //gets the input
     cin.get();
     char* s1 = parser.getSubStr1(input); //get the first substring in the input
-    //    cout << s1 << endl;
     if (strcmp(s1, "go") == 0) { //if go is typed
       char* direction = parser.getSubStr2(input, strlen(s1) + 1, strlen(input) + 1); //get second substring which is the direction of movement
       if (player.getCurrentRoom()->validKey(direction)) { //if a valid direction is entered switch the current room and print out the info
